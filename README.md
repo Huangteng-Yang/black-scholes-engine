@@ -55,11 +55,11 @@ d_1=\frac{\ln(S_0/K)+(r+\sigma^2/2)T}{\sigma\sqrt{T}},
 \qquad d_2=d_1-\sigma\sqrt{T},
 $$
 
-and \(\Phi\) denotes the standard normal CDF.
+and $\Phi$ denotes the standard normal CDF.
 
 ### Monte Carlo estimate
 
-Sampling \(Z_k\sim N(0,1)\), the terminal stock prices are generated directly from the exact GBM solution:
+Sampling $Z_k\sim N(0,1)$, the terminal stock prices are generated directly from the exact GBM solution:
 
 $$
 S_T^{(k)}=S_0\exp\left[\left(r-\frac{\sigma^2}{2}\right)T+
@@ -73,11 +73,11 @@ $$
 =\frac{e^{-rT}}{n}\sum_{k=1}^n (K-S_T^{(k)})^+.
 $$
 
-Because the European payoff depends only on \(S_T\), there is no need to simulate a full path.
+Because the European payoff depends only on $S_T$, there is no need to simulate a full path.
 
 ### Finite-difference discretization
 
-Let \(S_j=j\Delta S\), \(t_i=i\Delta t\), with \(\Delta S=S_{\max}/M\) and \(\Delta t=T/N\). Denote the central-difference spatial operator by \(L_h\).
+Let $S_j=j\Delta S$, $t_i=i\Delta t$, with $\Delta S=S_{\max}/M$ and $\Delta t=T/N$. Denote the central-difference spatial operator by $L_h$.
 
 The three time-stepping methods are:
 
@@ -110,36 +110,35 @@ The notebook uses a five-month European put with the following **numerical input
 
 | Parameter | Value |
 | --- | ---: |
-| Initial stock price \(S_0\) | 50 |
-| Strike \(K\) | 50 |
-| Risk-free rate \(r\) | 0.10 |
-| Volatility \(\sigma\) | 0.40 |
-| Maturity \(T\) | 0.4167 years |
-| Truncated domain \(S_{\max}\) | 200 |
+| Initial stock price $S_0$ | 50 |
+| Strike $K$ | 50 |
+| Risk-free rate $r$ | 0.10 |
+| Volatility $\sigma$ | 0.40 |
+| Maturity $T$ | 0.4167 years |
+| Truncated domain $S_{\max}$ | 200 |
 
 The analytical put price for these inputs is approximately **4.076101**.
 
 ### 1. Monte Carlo convergence
 
-For each sample size $n\in\{1000,1500,2000,3000,5000,10000\}$, the notebook repeats the Monte Carlo estimator **500 times** and calculates empirical root mean squared error (RMSE) relative to the analytical price:
+For each sample size $n\in\lbrace  1000,1500,2000,3000,5000,10000 \rbrace$, the notebook repeats the Monte Carlo estimator **500 times** and calculates empirical root mean squared error (RMSE) relative to the analytical price:
 
 $$
-\operatorname{RMSE}(n)
-=\sqrt{\frac{1}{R}\sum_{\ell=1}^R
+\operatorname{RMSE}(n)=\sqrt{\frac{1}{R}\sum_{\ell=1}^R
 \left(\widehat P_n^{(\ell)}-P_{\mathrm{BS}}\right)^2},
 \qquad R=500.
 $$
 
-The RMSE decreases at a rate consistent with \(O(n^{-1/2})\). A log-log fit of the displayed RMSE values gives an approximate slope of **−0.51**.
+The RMSE decreases at a rate consistent with $O(n^{-1/2})$. A log-log fit of the displayed RMSE values gives an approximate slope of **−0.51**.
 
 ![Monte Carlo RMSE convergence](figures/monte_carlo_rmse.png)
 
 ### 2. Temporal self-convergence
 
-Keep \(M=100\) fixed and refine the temporal grid:
+Keep $M=100$ fixed and refine the temporal grid:
 
 $$
-N\in\{1000,2000,4000,8000,16000,32000\}.
+N\in\lbrace1000,2000,4000,8000,16000,32000\rbrace.
 $$
 
 To isolate temporal convergence from the fixed spatial error, compare results at successive time resolutions:
@@ -164,10 +163,10 @@ These results support first-order temporal convergence for the explicit and impl
 
 ### 3. Spatial convergence
 
-Use the Crank–Nicolson solver with \(N=42000\) fixed, refining the spatial grid:
+Use the Crank–Nicolson solver with $N=42000$ fixed, refining the spatial grid:
 
 $$
-M\in\{40,80,160,320,640\}.
+M\in\lbrace40,80,160,320,640\rbrace.
 $$
 
 Define the pointwise error against the analytical price as
@@ -191,7 +190,7 @@ The observed order approaches **2**, consistent with the central-difference spat
 
 ### 4. Pricing and runtime comparison
 
-For the PDE solvers, use \(M=200\), \(N=8000\), and \(S_{\max}=200\). The Monte Carlo estimate uses **3000 simulated terminal values**.
+For the PDE solvers, use $M=200$, $N=8000$, and $S_{\max}=200$. The Monte Carlo estimate uses **3000 simulated terminal values**.
 
 The notebook records the following **single-run** results:
 
@@ -241,11 +240,11 @@ The Python modules are imported by the notebook. Place the modules and `experime
 
 4. Run the cells in order.
 
-**Reproducibility notes:** Monte Carlo values and single-run timings will vary between executions. A fixed random seed (2026) is used in each Monte Carlo experiment to ensure reproducible simulation results. Runtime measurements may vary across executions. The spatial convergence experiment uses a relatively large time-step count (\(N=42000\)) and can take longer than the other experiments.
+**Reproducibility notes:** Monte Carlo values and single-run timings will vary between executions. A fixed random seed (2026) is used in each Monte Carlo experiment to ensure reproducible simulation results. Runtime measurements may vary across executions. The spatial convergence experiment uses a relatively large time-step count ($N=42000$) and can take longer than the other experiments.
 
 ## Conclusions and limitations
 
-- The empirical Monte Carlo RMSE follows the expected \(O(n^{-1/2})\) scaling.
+- The empirical Monte Carlo RMSE follows the expected $O(n^{-1/2})$ scaling.
 - Explicit and implicit finite-difference solvers show approximately first-order **temporal** convergence.
 - Crank–Nicolson shows approximately second-order **temporal** convergence.
 - Second-order **spatial** convergence is numerically demonstrated using Crank–Nicolson.
