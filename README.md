@@ -24,7 +24,7 @@ $$
 dS_t = rS_t\,dt+\sigma S_t\,dW_t.
 $$
 
-The Black–Scholes PDE for a European put price \(P(t,S)\) is
+The Black–Scholes PDE for a European put price $P(t,S)$ is
 
 $$
 P_t+\frac{1}{2}\sigma^2 S^2P_{SS}+rSP_S-rP=0.
@@ -40,7 +40,7 @@ P(t,S_{\max})&\approx 0.
 \end{aligned}
 $$
 
-The last condition is a truncation approximation for sufficiently large \(S_{\max}\).
+The last condition is a truncation approximation for sufficiently large $S_{\max}$.
 
 ### Analytical benchmark
 
@@ -124,7 +124,7 @@ The analytical put price for these inputs is approximately **4.076101**.
 For each sample size $n\in\lbrace  1000,1500,2000,3000,5000,10000 \rbrace$, the notebook repeats the Monte Carlo estimator **500 times** and calculates empirical root mean squared error (RMSE) relative to the analytical price:
 
 $$
-\operatorname{RMSE}(n)=\sqrt{\frac{1}{R}\sum_{\ell=1}^R
+\mathrm{RMSE}(n)=\sqrt{\frac{1}{R}\sum_{\ell=1}^R
 \left(\widehat P_n^{(\ell)}-P_{\mathrm{BS}}\right)^2},
 \qquad R=500.
 $$
