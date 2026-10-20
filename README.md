@@ -242,6 +242,21 @@ The Python modules are imported by the notebook. Place the modules and `experime
 
 **Reproducibility notes:** Monte Carlo values and single-run timings will vary between executions. A fixed random seed (2026) is used in each Monte Carlo experiment to ensure reproducible simulation results. Runtime measurements may vary across executions. The spatial convergence experiment uses a relatively large time-step count ($N=42000$) and can take longer than the other experiments.
 
+
+## Related Project
+
+This project builds upon my earlier work on
+[Black-Scholes-Greeks](https://github.com/Huangteng-Yang/Black-Scholes-Greeks),
+which focuses on option pricing and the numerical computation
+of Greeks, including Delta and Vega.
+
+The present project extends the numerical analysis to
+finite difference PDE solvers, including explicit,
+implicit, and Crank-Nicolson methods.
+
+The main emphasis is on numerical stability, convergence
+orders, pricing accuracy, and computational efficiency.
+
 ## Conclusions and limitations
 
 - The empirical Monte Carlo RMSE follows the expected $O(n^{-1/2})$ scaling.
